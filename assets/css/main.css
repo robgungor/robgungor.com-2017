@@ -453,6 +453,8 @@ p.small {
     position: absolute;
     top: 50%;
     left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     z-index: 9999;
     display: block;
@@ -602,57 +604,68 @@ span.line-break {
 }
 
 .form-contact__submit__default {
+    -mx-transform: translate3d(0,2em,0);
     -webkit-transform: translate3d(0,2em,0);
     transform: translate3d(0,2em,0);
 }
 
 .form-contact__submit__error {
+    -ms-transform: translate3d(0,-6em,0);
     -webkit-transform: translate3d(0,-6em,0);
     transform: translate3d(0,-6em,0);
 }
 
 .form-contact__submit__sending {
+    -ms-transform: translate3d(0,-1em,0);
     -webkit-transform: translate3d(0,-1em,0);
     transform: translate3d(0,-1em,0);
 }
 
 .form-contact__submit.active .form-contact__submit__default {
+    -ms-transform: translate3d(0,-2em,0);
     -webkit-transform: translate3d(0,-2em,0);
     transform: translate3d(0,-2em,0);
 }
 
 .form-contact__submit.disabled .form-contact__submit__default {
+    -ms-transform: none;
     -webkit-transform: none;
     transform: none;
 }
 
 .form-contact__submit.active .form-contact__submit__action {    
+    -ms-transform: none;
     -webkit-transform: none;
     transform: none;
 }
 
 .form-contact__submit.invalid .form-contact__submit__default {  
+    -ms-transform: translate3d(0,-2em,0);
     -webkit-transform: translate3d(0,-2em,0);
     transform: translate3d(0,-2em,0);
 }
 
 .form-contact__submit.disabled .form-contact__submit__action {
+    -ms-transform: translate3d(0,2em,0);
     -webkit-transform: translate3d(0,2em,0);
     transform: translate3d(0,2em,0);
 }
 
 .form-contact__submit.invalid .form-contact__submit__error,
 .form-contact__submit.sending .form-contact__submit__action {
+    -ms-transform: translate3d(0,-2em,0);
     -webkit-transform: translate3d(0,-2em,0);
     transform: translate3d(0,-2em,0);
 }
 
 .form-contact__submit.sending .form-contact__submit__sending {
+    -ms-transform: translate3d(0,-3em,0);
     -webkit-transform: translate3d(0,-3em,0);
     transform: translate3d(0,-3em,0);
 }
 
 .form-contact__submit.sent .form-contact__submit__sending {
+    -ms-transform: translate3d(0,-4em,0);
     -webkit-transform: translate3d(0,-4em,0);
     transform: translate3d(0,-4em,0);
 }
@@ -707,6 +720,7 @@ span.line-break {
 }
 
 .js-shape {
+    -ms-transform-origin: 50% 50%;
     -webkit-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
 }

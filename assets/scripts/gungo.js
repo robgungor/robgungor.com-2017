@@ -1096,8 +1096,7 @@ function() {
     t.dataset && t.dataset.namespace && Gungo.Pjax.History.storeNamespace(t.dataset.namespace)
 }), Gungo.Dispatcher.on("initStateChange", function(t) {
     app.disableScroll(), {}, TweenLite.killTweensOf(loader.$progressbar), TweenLite.killTweensOf(loader.$progressbar_inner), t.namespace || Gungo.Pjax.History.setCurrentNamespace()
-}), Gungo.Dispatcher.on("newPageReady", function(t, e) {
-    app.inlineSVG()
+}), Gungo.Dispatcher.on("newPageReady", function(t, e) {    
 }), Gungo.Dispatcher.on("newPageProgress", function(t) {
     loader.progress(t)
 }), Gungo.Dispatcher.on("transitionCompleted", function(t, e) {
@@ -1195,16 +1194,15 @@ var BasicTransition = Gungo.BaseTransition.extend({
             clearProps: "position, top, left, width"
         })
     },
-    getColor: function(t) {
-        var e = "#000";
-        return "home" === t ? e = Home.getColor() : -1 !== ["contact", "project", "page"].indexOf(t) && (e = "#fff"), e
+    getColor: function(t) {        
+        return "#fff";
     }
 });
-Gungo.Pjax.getTransition = function() {
-    var t = Gungo.Pjax.History.prevStatus(),
-        e = Gungo.Pjax.History.currentStatus();
-    return e.namespace || Gungo.Pjax.History.setCurrentNamespace(), "projects" === t.namespace && "project" === e.namespace ? ProjectsToProjectTransition : "home" === t.namespace && "project" === e.namespace ? HomeToProjectTransition : "project" === t.namespace && "project" === e.namespace ? ProjectToProjectTransition : BasicTransition
+
+Gungo.Pjax.getTransition = function() {   
+    return BasicTransition;
 };
+
 var loader = {
     done: !1,
     deferred: null,
@@ -1252,19 +1250,14 @@ var loader = {
             }).set(this.$progressbar, {
                 clearProps: "background"
             }).add(function() {
-                app.enableScroll(0), app.setTitles();
+                app.enableScroll(0);
                 var e = Gungo.Pjax.Dom.getNamespace(Gungo.Pjax.Dom.getContainer());
                 t.displayProgressbar(e), $("body").addClass("loaded")
             }).to(".doors-transition", .8, {
                 height: 0,
                 clearProps: "top, bottom",
                 ease: CubicBezier.get("custom-0.74")
-            }).fromTo([".site__logo", ".site__nav"], 1, {
-                autoAlpha: 0
-            }, {
-                autoAlpha: 1,
-                ease: CubicBezier.get("custom-0.84")
-            })
+            });
         }
     },
     startProgress: function() {
@@ -1673,24 +1666,20 @@ var app = {
         width: 0,
         height: 0
     },
-    $header: null,
-    $nav: null,
-    init: function() {
-        this.$header = $("#js-header"); 
-        this.$nav = $("#js-nav");
-        this.inlineSVG();
+    init: function() {      
         this._resetFeatureTests();
         this._resetViewportDimensions();
-        this._initPlugins();
-        this._initEvents();
         this._centerLogo();
-        
+        this._initPlugins();
+        this._initEvents();        
     },    
     _initPlugins: function() {},
     _initEvents: function() {
         var t = this;
         $(window).on("resize.app", function() {
-            t._resetFeatureTests(), t._resetViewportDimensions()
+            t._resetFeatureTests();
+            t._resetViewportDimensions(); 
+            t._centerLogo();
         }).on("orientationchange.app", function() {
             t._resetViewportDimensions()
         })
@@ -1710,8 +1699,7 @@ var app = {
     },
     _resetViewportDimensions: function() {
         this.viewport.width = $(window).width(); 
-        this.viewport.height = $(window).height();
-        this._centerLogo();
+        this.viewport.height = $(window).height();        
     },
     _centerLogo: function() {
         var hiOffset = $('.first').height() + parseInt($('.first').css('margin-bottom').replace(/[^-\d\.]/g, ''));
@@ -1723,47 +1711,7 @@ var app = {
         if (this._waypoints && this._waypoints.length) {
             for (var e in this._waypoints) this._waypoints[e].destroy();
             this._waypoints = null
-        }
-        this._waypoints = $("[data-nav-color]").waypoint({
-            group: "nav-color",
-            offset: function() {
-                return parseInt(t.$nav.css("top")) + t.$nav.outerHeight() / 2
-            },
-            handler: function(e) {
-                var i = "down" === e ? this : this.previous();
-                if (i) {
-                    var o = $(i.element).data("nav-color");
-                    t.setHeaderColor(o)
-                }
-            }
-        })
-    },
-    setHeaderColor: function(t) {
-        this.$header.removeClass(function() {
-            return this.className.split(" ").filter(function(t) {
-                return t.match(/color-+/)
-            }).join(" ")
-        }), "undefined" != typeof t && this.$header.addClass("color-" + t)
-    },
-    inlineSVG: function() {
-        $("img.svg").each(function() {
-            var t = $(this),
-                e = t.attr("id"),
-                i = t.attr("class"),
-                o = t.attr("src"),
-                n = t.attr("width"),
-                s = t.attr("height");
-            $.get(o, function(o) {
-                var a = $(o).find("svg");
-                "undefined" != typeof e && (a = a.attr("id", e)), "undefined" != typeof i && (a = a.attr("class", i + " replaced-svg")), a = a.removeAttr("xmlns:a"), n && s && a.attr({
-                    width: n,
-                    height: s
-                }), !a.attr("viewBox") && a.attr("height") && a.attr("width") && a.attr("viewBox", "0 0 " + a.attr("height") + " " + a.attr("width")), t.replaceWith(a)
-            }, "xml")
-        })
-    },
-    setTitles: function() {
-       
+        }        
     }
 };
 $(function() {

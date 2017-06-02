@@ -1676,8 +1676,16 @@ var app = {
     $header: null,
     $nav: null,
     init: function() {
-        this.$header = $("#js-header"), this.$nav = $("#js-nav"), this.inlineSVG(), this._resetFeatureTests(), this._resetViewportDimensions(), this._initPlugins(), this._initEvents()
-    },
+        this.$header = $("#js-header"); 
+        this.$nav = $("#js-nav");
+        this.inlineSVG();
+        this._resetFeatureTests();
+        this._resetViewportDimensions();
+        this._initPlugins();
+        this._initEvents();
+        this._centerLogo();
+        
+    },    
     _initPlugins: function() {},
     _initEvents: function() {
         var t = this;
@@ -1701,7 +1709,14 @@ var app = {
         this.is_mobile = feature.matchMedia && window.matchMedia("(max-width: 991px)").matches, this.is_touch = feature.touch
     },
     _resetViewportDimensions: function() {
-        this.viewport.width = $(window).width(), this.viewport.height = $(window).height()
+        this.viewport.width = $(window).width(); 
+        this.viewport.height = $(window).height();
+        this._centerLogo();
+    },
+    _centerLogo: function() {
+        var hiOffset = $('.first').height() + parseInt($('.first').css('margin-bottom').replace(/[^-\d\.]/g, ''));
+        vertOffset = ($(window).height()/2) - ($('.robgungor__wrapper').height()/2) - hiOffset;        
+        $('.gungo-container').css({'padding-top':vertOffset});
     },
     resetWaypoints: function() {
         var t = this;

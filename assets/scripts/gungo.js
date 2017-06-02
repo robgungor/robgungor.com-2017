@@ -1702,8 +1702,8 @@ var app = {
         this.viewport.height = $(window).height();        
     },
     _centerLogo: function() {
-        var hiOffset = $('.first').height() + parseInt($('.first').css('margin-bottom').replace(/[^-\d\.]/g, ''));
-        vertOffset = ($(window).height()/2) - ($('.robgungor__wrapper').height()/2) - hiOffset;        
+        var hiOffset = $('.first').height() + parseInt($('.first').css('margin-bottom').replace(/[^-\d\.]/g, ''));        
+        vertOffset = ($(window).height()/2) - ($('.robgungor').height()/2) - hiOffset;        
         $('.gungo-container').css({'padding-top':vertOffset});
     },
     resetWaypoints: function() {

@@ -434,8 +434,8 @@ p.small {
 
 .robgungor {
     display: block;
-    width: 32.36em;
-    height: 20em;
+    width: 6.472em;
+    height: 4em;
     text-align: center;
     background: transparent;
     color: #ffffff;
@@ -443,18 +443,10 @@ p.small {
     margin: auto;
     z-index: auto;
     max-width: 100%;
-}
-
-.robgungor__wrapper {
     background: #0d01ff;
-    width: 32.36em;
-    height: 20em;
-    margin: auto;
-    z-index: 0;
-    max-width: 100%;
 }
 
-.robgungor h1 {
+.robgungor span {
     line-height: .7em;
     margin: 0em auto;
     width: 4em;
@@ -803,10 +795,21 @@ span.line-break {
     }   
 
     p, h1 {
-        font-size: 60px;
-        line-height: 60px;
+        font-size: 8rem;
+        line-height: 8rem;
     }
+    .robgungor__wrapper {
+        
+        width: 32.36em;
+        height: 20em;
+    }
+}
 
+@media (max-width:768px) {
+    p, h1 {
+        font-size: 6rem;
+        line-height: 6rem;
+    }
 }
 
 @media (max-width:479px) {
